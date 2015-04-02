@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="rest.api.explorer">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>API Explorer</title>
+
+    <!-- Bootstrap -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-cookies.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+    <script src="js/rest-explorer.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+</head>
+<body>
+<h1>API Explorer</h1>
+
+<div ng-controller="ApiExplorerController">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">Host <input ng-model="host" style="width: 40em;"></div>
+            <div class="col-md-4">Corsproxy host <input ng-model="corsHost"></div>
+            <a href="#"
+               popover="This tool needs corsproxy to be started locally. See https://www.npmjs.com/package/corsproxy "
+               popover-placement="bottom"
+               popover-title="corsproxy"
+               popover-trigger="click">
+                What is this?
+            </a>
+            <a href="#" tooltip="bottom" tooltip-html-unsafe="{{htmlTooltip}}">What is this?</a>
+
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-default" ng-click="login()">Login Username</button>
+            </div>
+            <div class="col-md-1">Name</div>
+            <div class="col-md-2"><input ng-model="loginName"/></div>
+            <div class="col-md-1">Pasword</div>
+            <div class="col-md-2"><input ng-model="loginPassword"/></div>
+            <div ng-if="logged" style="color: blue;">Logged</div>
+            <div ng-if="!logged" style="color: red;">Not Logged</div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-default" ng-click="loginWithCookie()">Login Cookie</button>
+            </div>
+            <div class="col-md-1">Cookie</div>
+            <div class="col-md-6"><input ng-model="loginCookie" style="width: 25em;"/></div>
+        </div>
+        <hr/>
+        <div class="row">
+
+            <div class="col-md-7">
+                <tabset>
+                    <tab heading="Docs">
+                        <tabset>
+                            <tab heading="Get">
+                                <div class="row">
+                                    <div class="col-md-1">fields=</div>
+                                    <div class="col-md-3"><input ng-model="pfields"/></div>
+                                    <div class="col-md-2">[{{pfields}}]</div>
+                                </div>
+                                <div class="row">
+                                    <button class="btn btn-default" ng-click="getCsssInput()">Get CSS In</button>
+
+                                    <button class="btn btn-default" ng-click="getCsssOutput()">Get CSS Out</button>
+
+                                    <button class="btn btn-default" ng-click="getXsds()">Get XSD</button>
+                                </div>
+                            </tab>
+                        </tabset>
+                    </tab>
+                    <tab heading="CV">
+                        <tabset>
+
+
+                        </tabset>
+                    </tab>
+                </tabset>
+            </div>
+            <div class="col-md-5">
+                <div>Last Url: {{lastUrl}}</textarea>
+                    <textarea cols="60" rows="30">{{lastResponse}}</textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
